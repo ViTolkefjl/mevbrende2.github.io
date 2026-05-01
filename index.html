@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Мы в бренде</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:      #F5F0FF;
+  --bg2:     #EEE6FF;
+  --bg3:     #E4D8FF;
+  --purple:  #6B3FA0;
+  --purple2: #8B5CC8;
+  --lavender:#C4A8F0;
+  --soft:    #D8C6F5;
+  --ink:     #1E1230;
+  --ink2:    #3D2860;
+  --muted:   #8070A8;
+  --line:    rgba(107,63,160,0.12);
+  --white:   #FFFFFF;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  cursor: none;
+}
+
+/* CURSOR */
+.cursor {
+  width: 8px; height: 8px;
+  background: var(--purple);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9999;
+  transform: translate(-50%,-50%);
+  transition: width .2s, height .2s, background .2s;
+}
+.cursor-ring {
+  width: 34px; height: 34px;
+  border: 1px solid rgba(107,63,160,0.35);
+  border-radius: 50%;
+  position: fixed; top: 0; left: 0;
+  pointer-events: none; z-index: 9998;
+  transform: translate(-50%,-50%);
+  transition: width .25s, height .25s, border-color .25s;
+}
+.cursor.hov { width: 6px; height: 6px; background: var(--lavender); }
+.cursor-ring.hov { width: 54px; height: 54px; border-color: rgba(107,63,160,0.2); }
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5%; height: 66px;
+  background: rgba(245,240,255,0.88);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+}
+.logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--ink); text-decoration: none;
+}
+.nav-links { display: flex; gap: 2.8rem; list-style: none; }
+.nav-links a {
+  font-size: 0.72rem; font-weight: 400;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color .22s;
+}
+.nav-links a:hover { color: var(--purple); }
+.nav-cta {
+  font-size: 0.7rem; font-weight: 500;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--white); background: var(--purple);
+  padding: 0.55rem 1.5rem; text-decoration: none;
+  border-radius: 50px;
+  transition: background .22s;
+}
+.nav-cta:hover { background: var(--purple2); }
+
+/* HERO */
+#hero {
+  min-height: 100vh;
+  padding-top: 66px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 5rem 4rem 5rem 5%;
+  position: relative;
+}
+/* soft blob bg */
+.hero-left::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(196,168,240,0.3) 0%, transparent 65%);
+  top: -100px; left: -150px;
+  pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.7rem;
+  font-size: 0.65rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--purple);
+  margin-bottom: 2rem;
+}
+.hero-eyebrow-dot {
+  width: 6px; height: 6px;
+  background: var(--lavender); border-radius: 50%;
+}
+h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3rem, 5.5vw, 6.5rem);
+  font-weight: 300; line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  margin-bottom: 1.8rem;
+}
+h1 em { font-style: italic; color: var(--purple2); }
+h1 span { display: block; color: var(--muted); font-weight: 300; }
+.hero-desc {
+  font-size: 0.88rem; font-weight: 300;
+  color: var(--muted); max-width: 380px;
+  line-height: 1.85; margin-bottom: 2.8rem;
+}
+.hero-btns { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.btn-solid {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--white); background: var(--purple);
+  padding: 0.9rem 1.9rem; border-radius: 50px; text-decoration: none;
+  transition: background .22s, transform .15s;
+}
+.btn-solid:hover { background: var(--purple2); transform: translateY(-1px); }
+.btn-soft {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--purple); background: var(--bg2);
+  padding: 0.9rem 1.9rem; border-radius: 50px; text-decoration: none;
+  border: 1px solid var(--soft);
+  transition: background .22s, border-color .22s;
+}
+.btn-soft:hover { background: var(--bg3); border-color: var(--lavender); }
+
+/* hero right: large decorative area */
+.hero-right {
+  position: relative; overflow: hidden;
+  background: var(--bg2);
+  display: flex; flex-direction: column;
+  justify-content: flex-end;
+  padding: 4rem;
+}
+.hero-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero-blob.b1 {
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, rgba(196,168,240,0.5) 0%, transparent 70%);
+  top: -80px; right: -80px;
+}
+.hero-blob.b2 {
+  width: 280px; height: 280px;
+  background: radial-gradient(circle, rgba(107,63,160,0.15) 0%, transparent 70%);
+  bottom: 80px; left: 60px;
+}
+.hero-blob.b3 {
+  width: 180px; height: 180px;
+  background: radial-gradient(circle, rgba(216,198,245,0.6) 0%, transparent 70%);
+  top: 40%; right: 30%;
+}
+.hero-right-content { position: relative; z-index: 1; }
+.hero-big-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(4rem, 8vw, 9rem);
+  font-weight: 300; line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: rgba(107,63,160,0.12);
+  position: absolute; top: 3rem; left: 3rem;
+  pointer-events: none; z-index: 0;
+}
+.hero-pills {
+  display: flex; flex-wrap: wrap; gap: 0.6rem;
+  margin-bottom: 2rem; position: relative; z-index: 1;
+}
+.pill {
+  font-size: 0.68rem; font-weight: 400;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--purple);
+  background: var(--white);
+  border: 1px solid var(--soft);
+  padding: 0.4rem 0.9rem; border-radius: 50px;
+}
+.hero-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  padding: 2rem 2.2rem;
+  position: relative; z-index: 1;
+}
+.hero-card-title {
+  font-size: 0.65rem; font-weight: 500;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 1.4rem;
+}
+.hero-feats { display: flex; flex-direction: column; gap: 1rem; }
+.hero-feat {
+  display: flex; align-items: center; gap: 0.9rem;
+}
+.feat-dot {
+  width: 8px; height: 8px; flex-shrink: 0;
+  background: var(--lavender); border-radius: 50%;
+}
+.feat-text {
+  font-size: 0.82rem; font-weight: 400; color: var(--ink2);
+}
+
+/* MARQUEE */
+.marquee-wrap {
+  overflow: hidden; white-space: nowrap;
+  background: var(--purple);
+  padding: 0.85rem 0;
+}
+.marquee-inner { display: inline-block; animation: mar 24s linear infinite; }
+.marquee-inner span {
+  font-size: 0.65rem; font-weight: 400;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.65);
+  padding: 0 2.5rem;
+}
+.marquee-inner span.sep { color: rgba(255,255,255,0.25); padding: 0; }
+@keyframes mar { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* SECTIONS */
+.sec { padding: 7rem 5%; }
+.sec-eyebrow {
+  font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--lavender); margin-bottom: 0.8rem;
+}
+h2.sh {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.2rem, 4vw, 4rem);
+  font-weight: 300; color: var(--ink);
+  line-height: 1.1; letter-spacing: -0.02em;
+  margin-bottom: 0.6rem;
+}
+h2.sh em { font-style: italic; color: var(--purple2); }
+.sec-sub {
+  font-size: 0.85rem; font-weight: 300;
+  color: var(--muted); max-width: 460px;
+  line-height: 1.85; margin-bottom: 3.5rem;
+}
+
+/* ABOUT */
+#about { background: var(--white); }
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+}
+.about-text p {
+  font-size: 0.85rem; font-weight: 300;
+  color: var(--muted); line-height: 1.9; margin-bottom: 1.1rem;
+}
+.about-right {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+}
+.about-card {
+  background: var(--bg); border: 1px solid var(--line);
+  border-radius: 16px; padding: 1.6rem;
+}
+.about-card-ico {
+  width: 38px; height: 38px;
+  background: var(--bg2); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 0.9rem;
+}
+.about-card h4 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.05rem; font-weight: 500; color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+.about-card p { font-size: 0.75rem; color: var(--muted); line-height: 1.65; font-weight: 300; }
+
+/* SERVICES */
+#services { background: var(--bg); }
+.services-layout { display: grid; grid-template-columns: 260px 1fr; gap: 5rem; align-items: start; }
+.services-sticky { position: sticky; top: 86px; }
+.services-sticky p { font-size: 0.82rem; font-weight: 300; color: var(--muted); margin-top: 0.8rem; margin-bottom: 2rem; line-height: 1.85; }
+.s-list { list-style: none; border-top: 1px solid var(--line); }
+.s-item {
+  display: flex; align-items: center; gap: 2rem;
+  padding: 1.8rem 0;
+  border-bottom: 1px solid var(--line);
+  transition: background .2s; position: relative;
+}
+.s-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.82rem; color: var(--soft);
+  letter-spacing: 0.1em; flex-shrink: 0; width: 32px;
+}
+.s-ico {
+  width: 42px; height: 42px; flex-shrink: 0;
+  background: var(--bg2); border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background .22s;
+}
+.s-item:hover .s-ico { background: var(--bg3); }
+.s-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.45rem; font-weight: 400; color: var(--ink);
+  flex: 1; transition: color .22s;
+}
+.s-item:hover .s-name { color: var(--purple); }
+.s-desc { font-size: 0.75rem; font-weight: 300; color: var(--muted); max-width: 220px; line-height: 1.65; }
+.s-tag {
+  font-size: 0.58rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--purple); background: var(--bg2);
+  border: 1px solid var(--soft); padding: 0.3rem 0.7rem;
+  border-radius: 50px; white-space: nowrap; flex-shrink: 0;
+}
+
+/* STEPS */
+#steps { background: var(--bg2); }
+.steps-layout {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+}
+.steps-left h2 { margin-bottom: 0.8rem; }
+.steps-left p { font-size: 0.85rem; font-weight: 300; color: var(--muted); line-height: 1.85; margin-bottom: 2.5rem; }
+.steps-right { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--line); }
+.step-row {
+  display: flex; gap: 2rem; align-items: flex-start;
+  padding: 2.2rem 0; border-bottom: 1px solid var(--line);
+}
+.step-n {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.8rem; font-weight: 300;
+  color: var(--soft); line-height: 1; flex-shrink: 0;
+  width: 52px;
+}
+.step-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem; font-weight: 400; color: var(--ink);
+  margin-bottom: 0.4rem;
+}
+.step-desc { font-size: 0.78rem; font-weight: 300; color: var(--muted); line-height: 1.75; }
+
+/* PHILOSOPHY */
+#philosophy {
+  padding: 9rem 5%;
+  background: var(--purple);
+  position: relative; overflow: hidden;
+  text-align: center;
+}
+.phil-blob {
+  position: absolute; pointer-events: none; border-radius: 50%;
+}
+.phil-blob.pb1 { width: 500px; height: 500px; background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%); top: -100px; left: -100px; }
+.phil-blob.pb2 { width: 400px; height: 400px; background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%); bottom: -80px; right: -80px; }
+.phil-label {
+  font-size: 0.62rem; font-weight: 500; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--lavender); margin-bottom: 3rem;
+  display: flex; align-items: center; justify-content: center; gap: 1.2rem;
+}
+.phil-label::before, .phil-label::after { content: ''; width: 32px; height: 1px; background: var(--lavender); opacity: 0.5; }
+.phil-quote {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 5rem);
+  font-weight: 300; line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: rgba(255,255,255,0.95);
+  max-width: 860px; margin: 0 auto 2.5rem;
+  position: relative; z-index: 1;
+}
+.phil-quote em { font-style: italic; color: var(--lavender); }
+.phil-sub {
+  font-size: 0.68rem; font-weight: 400;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+  position: relative; z-index: 1;
+}
+
+/* CONTACT */
+#contact { background: var(--white); }
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+.contact-left h2 { margin-bottom: 1rem; }
+.contact-left p { font-size: 0.85rem; font-weight: 300; color: var(--muted); line-height: 1.85; margin-bottom: 2.5rem; max-width: 360px; }
+.contact-channels { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--line); }
+.ch-link {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.5rem 0; border-bottom: 1px solid var(--line);
+  text-decoration: none; transition: padding-left .25s;
+}
+.ch-link:hover { padding-left: 0.4rem; }
+.ch-label { font-size: 0.6rem; font-weight: 400; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.2rem; }
+.ch-name { font-family: 'Cormorant Garamond', serif; font-size: 1.35rem; font-weight: 400; color: var(--ink); transition: color .22s; }
+.ch-link:hover .ch-name { color: var(--purple); }
+.ch-arrow { color: var(--soft); font-size: 1.1rem; transition: color .22s, transform .22s; }
+.ch-link:hover .ch-arrow { color: var(--purple); transform: translateX(4px); }
+
+.contact-right {
+  background: var(--bg); border: 1px solid var(--line);
+  border-radius: 20px; padding: 2.8rem;
+  display: flex; flex-direction: column; gap: 2.2rem;
+}
+.info-group {}
+.info-label { font-size: 0.6rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--lavender); margin-bottom: 0.5rem; }
+.info-val { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 400; color: var(--ink); line-height: 1.5; }
+.info-links { display: flex; flex-direction: column; gap: 0.35rem; }
+.info-links a { font-size: 0.75rem; color: var(--muted); text-decoration: none; cursor: pointer; transition: color .2s; letter-spacing: 0.02em; }
+.info-links a:hover { color: var(--purple); }
+.contact-divider { height: 1px; background: var(--line); }
+
+/* FOOTER */
+footer {
+  background: var(--bg); border-top: 1px solid var(--line);
+  padding: 2rem 5%;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 1rem;
+}
+.f-logo { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink2); text-decoration: none; }
+.f-copy { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.06em; }
+.f-docs { display: flex; gap: 1.8rem; }
+.f-docs a { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; cursor: pointer; transition: color .2s; }
+.f-docs a:hover { color: var(--purple); }
+
+/* MODAL */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(30,18,48,0.6);
+  backdrop-filter: blur(16px);
+  z-index: 999;
+  display: flex; align-items: center; justify-content: center;
+  padding: 2rem;
+  opacity: 0; pointer-events: none; transition: opacity .28s;
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--white); border: 1px solid var(--line);
+  border-radius: 20px;
+  width: 100%; max-width: 640px; max-height: 82vh;
+  display: flex; flex-direction: column;
+  transform: translateY(18px); transition: transform .28s;
+}
+.modal-overlay.open .modal { transform: translateY(0); }
+.modal-head {
+  padding: 1.8rem 2.2rem 1.4rem;
+  border-bottom: 1px solid var(--line);
+  display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+}
+.modal-head h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 500; color: var(--ink); }
+.modal-close { width: 30px; height: 30px; border: 1px solid var(--line); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 0.72rem; color: var(--muted); transition: background .2s, color .2s; }
+.modal-close:hover { background: var(--bg); color: var(--purple); }
+.modal-body { padding: 2rem 2.2rem; overflow-y: auto; flex: 1; }
+.modal-body h4 { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--purple); margin: 1.6rem 0 0.5rem; }
+.modal-body h4:first-child { margin-top: 0; }
+.modal-body p { font-size: 0.8rem; color: var(--muted); line-height: 1.85; margin-bottom: 0.5rem; font-weight: 300; }
+.modal-body ul { padding-left: 1.1rem; margin-bottom: 0.5rem; }
+.modal-body ul li { font-size: 0.8rem; color: var(--muted); line-height: 1.85; font-weight: 300; }
+
+/* COOKIE */
+.cookie {
+  position: fixed; bottom: 1.5rem; right: 1.5rem;
+  background: var(--white); border: 1px solid var(--line);
+  border-radius: 16px; padding: 1.4rem 1.6rem;
+  max-width: 320px; z-index: 998;
+  box-shadow: 0 8px 40px rgba(107,63,160,0.1);
+  transition: opacity .3s, transform .3s;
+}
+.cookie.hidden { opacity: 0; transform: translateY(10px); pointer-events: none; }
+.cookie p { font-size: 0.75rem; color: var(--muted); line-height: 1.8; margin-bottom: 1rem; font-weight: 300; }
+.cookie p a { color: var(--purple); cursor: pointer; }
+.cookie-btn { background: var(--purple); color: #fff; border: none; border-radius: 50px; padding: 0.55rem 1.4rem; font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .2s; }
+.cookie-btn:hover { background: var(--purple2); }
+
+/* MOBILE */
+@media (max-width: 960px) {
+  #hero { grid-template-columns: 1fr; }
+  .hero-left { padding: 4rem 5%; }
+  .hero-right { min-height: 380px; padding: 2.5rem; }
+  .about-grid, .steps-layout, .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .services-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .services-sticky { position: static; }
+  .s-desc, .s-tag { display: none; }
+  .nav-links { display: none; }
+  .about-right { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  h1 { font-size: 3rem; }
+  .cookie { left: 1rem; right: 1rem; max-width: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor" id="c"></div>
+<div class="cursor-ring" id="cr"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="logo">Мы в бренде</a>
+  <ul class="nav-links">
+    <li><a href="#about">О нас</a></li>
+    <li><a href="#services">Услуги</a></li>
+    <li><a href="#steps">Процесс</a></li>
+    <li><a href="#contact">Контакт</a></li>
+  </ul>
+  <a href="https://vk.com/" target="_blank" class="nav-cta">Написать нам</a>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-dot"></span>
+      Байерский сервис
+    </div>
+    <h1>
+      Покупки<br>
+      за рубежом —<br>
+      <em>легко</em>
+      <span>и с любовью.</span>
+    </h1>
+    <p class="hero-desc">Доставляем оригинальные товары из США и Европы. Одежда, косметика, аксессуары и всё что вы захотите — прямо к вашей двери.</p>
+    <div class="hero-btns">
+      <a href="https://vk.com/" target="_blank" class="btn-solid">
+        <svg width="15" height="15" viewBox="0 0 24 24"><path d="M12.87 16.5s.26-.03.4-.18c.12-.14.12-.4.12-.4s-.02-1.22.55-1.4c.56-.17 1.28 1.18 2.04 1.7.58.39 1.02.3 1.02.3l2.04-.03s1.07-.06.56-1c-.04-.07-.3-.65-1.56-1.83-1.31-1.24-1.14-1.04.45-3.18.97-1.3 1.36-2.09 1.24-2.43-.12-.32-.82-.24-.82-.24l-2.3.01s-.17-.02-.3.06c-.12.08-.2.26-.2.26s-.37 1.01-.87 1.87c-1.05 1.78-1.47 1.87-1.64 1.76-.4-.26-.3-1.04-.3-1.6 0-1.74.26-2.47-.51-2.65-.26-.06-.45-.1-1.1-.11-.84-.01-1.56 0-1.96.2-.27.13-.47.43-.35.45.16.02.51.1.7.36.23.34.22 1.1.22 1.1s.13 2.04-.31 2.3c-.3.17-.72-.18-1.62-1.79-.48-.84-.84-1.77-.84-1.77s-.07-.17-.19-.27c-.15-.11-.35-.14-.35-.14l-2.18.01s-.33.01-.45.15c-.11.13-.01.4-.01.4s1.7 3.97 3.62 5.97c1.76 1.83 3.76 1.71 3.76 1.71h.91z" fill="white"/></svg>
+        ВКонтакте
+      </a>
+      <a href="#about" class="btn-soft">О нас →</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-blob b1"></div>
+    <div class="hero-blob b2"></div>
+    <div class="hero-blob b3"></div>
+    <div class="hero-big-text">BRAND</div>
+    <div class="hero-pills">
+      <span class="pill">США & Европа</span>
+      <span class="pill">100% Оригинал</span>
+      <span class="pill">Ежедневные выкупы</span>
+      <span class="pill">Личный подход</span>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-title">Почему выбирают нас</div>
+      <div class="hero-feats">
+        <div class="hero-feat"><div class="feat-dot"></div><div class="feat-text">Только оригинальные товары из официальных магазинов</div></div>
+        <div class="hero-feat"><div class="feat-dot"></div><div class="feat-text">Ежедневные выкупы по самым выгодным ценам</div></div>
+        <div class="hero-feat"><div class="feat-dot"></div><div class="feat-text">Индивидуальный подход к каждому клиенту</div></div>
+        <div class="hero-feat"><div class="feat-dot"></div><div class="feat-text">Полное сопровождение от выкупа до получения</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-inner">
+    <span>США и Европа</span><span class="sep">·</span><span>100% Оригинал</span><span class="sep">·</span><span>Одежда и обувь</span><span class="sep">·</span><span>Косметика</span><span class="sep">·</span><span>Товары для детей</span><span class="sep">·</span><span>Аксессуары</span><span class="sep">·</span><span>Личный подход</span><span class="sep">·</span><span>Доставка по России</span><span class="sep">·</span>
+    <span>США и Европа</span><span class="sep">·</span><span>100% Оригинал</span><span class="sep">·</span><span>Одежда и обувь</span><span class="sep">·</span><span>Косметика</span><span class="sep">·</span><span>Товары для детей</span><span class="sep">·</span><span>Аксессуары</span><span class="sep">·</span><span>Личный подход</span><span class="sep">·</span><span>Доставка по России</span><span class="sep">·</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="about-grid">
+    <div>
+      <div class="sec-eyebrow">О нас</div>
+      <h2 class="sh">Ваш личный<br><em>байер</em></h2>
+      <div class="about-text" style="margin-top:1rem;">
+        <p>Мы — команда байеров, которые помогают вам покупать оригинальные товары из американских и европейских магазинов по выгодным ценам.</p>
+        <p>Наш сервис берёт на себя всё: от поиска и выкупа товара до таможенного оформления и доставки прямо к вашей двери.</p>
+        <p>Вы выбираете — а мы сделаем всё остальное!</p>
+      </div>
+      <a href="https://vk.com/" target="_blank" class="btn-solid" style="margin-top:2rem;">Связаться с нами</a>
+    </div>
+    <div class="about-right">
+      <div class="about-card">
+        <div class="about-card-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B3FA0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <h4>100% оригинал</h4>
+        <p>Только подлинные товары из официальных магазинов</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B3FA0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <h4>Ежедневно</h4>
+        <p>Выкупаем заказы каждый день</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B3FA0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <h4>Личный подход</h4>
+        <p>Индивидуальный сервис для каждого</p>
+      </div>
+      <div class="about-card">
+        <div class="about-card-ico"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B3FA0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <h4>До двери</h4>
+        <p>Полное сопровождение от выкупа до получения</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec" id="services">
+  <div class="services-layout">
+    <div class="services-sticky">
+      <div class="sec-eyebrow">Услуги</div>
+      <h2 class="sh">Что мы<br><em>привозим</em></h2>
+      <p>Выкупаем любые товары из США и Европы — от одежды до электроники. Пришлите ссылку — доставим.</p>
+      <a href="https://vk.com/" target="_blank" class="btn-solid">Сделать заказ</a>
+    </div>
+    <ul class="s-list">
+      <li class="s-item">
+        <span class="s-num">01</span>
+        <div class="s-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B3FA0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.38 3.46L16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.57a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.57a2 2 0 0 0-1.34-2.23z"/></svg></div>
+        <span class="s-name">Одежда & Обувь</span>
+        <span class="s-desc">Nike, Zara, Gap, Tommy Hilfiger и сотни других брендов</span>
+        <span class="s-tag">США / Европа</span>
+      </li>
+      <li class="s-item">
+        <span class="s-num">02</span>
+        <div class="s-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B3FA0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <span class="s-name">Косметика & Уход</span>
+        <span class="s-desc">Оригинальная косметика и парфюмерия мировых брендов</span>
+        <span class="s-tag">США / Европа</span>
+      </li>
+      <li class="s-item">
+        <span class="s-num">03</span>
+        <div class="s-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B3FA0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <span class="s-name">Товары для детей</span>
+        <span class="s-desc">Одежда, обувь и игрушки из зарубежных магазинов</span>
+        <span class="s-tag">США / Европа</span>
+      </li>
+      <li class="s-item">
+        <span class="s-num">04</span>
+        <div class="s-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B3FA0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <span class="s-name">Аксессуары</span>
+        <span class="s-desc">Сумки, украшения и аксессуары известных брендов</span>
+        <span class="s-tag">США / Европа</span>
+      </li>
+      <li class="s-item">
+        <span class="s-num">05</span>
+        <div class="s-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B3FA0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+        <span class="s-name">Техника & Гаджеты</span>
+        <span class="s-desc">Электроника, которую сложно найти в России</span>
+        <span class="s-tag">США / Европа</span>
+      </li>
+      <li class="s-item">
+        <span class="s-num">06</span>
+        <div class="s-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6B3FA0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
+        <span class="s-name">Любой запрос</span>
+        <span class="s-desc">Пришлите ссылку — выкупим из любого магазина</span>
+        <span class="s-tag">По запросу</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section class="sec" id="steps">
+  <div class="steps-layout">
+    <div class="steps-left">
+      <div class="sec-eyebrow">Как мы работаем</div>
+      <h2 class="sh">4 шага до<br><em>покупки</em></h2>
+      <p>Простой процесс без лишних шагов. Вы выбираете — мы берём на себя выкуп, таможню и доставку.</p>
+      <a href="https://vk.com/" target="_blank" class="btn-solid">Написать нам</a>
+    </div>
+    <div class="steps-right">
+      <div class="step-row"><div class="step-n">01</div><div><div class="step-title">Выбираете товар</div><p class="step-desc">В нашей группе ВКонтакте или самостоятельно — присылаете нам ссылку.</p></div></div>
+      <div class="step-row"><div class="step-n">02</div><div><div class="step-title">Согласуем детали</div><p class="step-desc">Уточняем размер, наличие и итоговую стоимость с доставкой. Без скрытых платежей.</p></div></div>
+      <div class="step-row"><div class="step-n">03</div><div><div class="step-title">Выкупаем</div><p class="step-desc">Берём на себя оплату, таможенное оформление и все организационные вопросы.</p></div></div>
+      <div class="step-row"><div class="step-n">04</div><div><div class="step-title">Вы получаете</div><p class="step-desc">Выбираете удобный способ доставки и получаете товар — именно такой, как выбирали.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <div class="phil-blob pb1"></div>
+  <div class="phil-blob pb2"></div>
+  <div class="phil-label">Наша философия</div>
+  <p class="phil-quote">Покупки за рубежом должны быть <em>доступными</em> — не привилегией, а нормой.</p>
+  <p class="phil-sub">Мы в бренде — байерский сервис</p>
+</section>
+
+<!-- CONTACT -->
+<section class="sec" id="contact">
+  <div class="sec-eyebrow">Контакты</div>
+  <h2 class="sh" style="margin-bottom:2.5rem;">Готовы <em>помочь</em></h2>
+  <div class="contact-grid">
+    <div class="contact-left">
+      <p>Напишите нам — расскажем об условиях, поможем с выбором и оформим ваш заказ.</p>
+      <div class="contact-channels">
+        <a href="https://vk.com/" target="_blank" class="ch-link">
+          <div><div class="ch-label">ВКонтакте</div><div class="ch-name">Группа ВКонтакте</div></div>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a href="https://t.me/" target="_blank" class="ch-link">
+          <div><div class="ch-label">Telegram</div><div class="ch-name">Написать в Telegram</div></div>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a href="https://wa.me/" target="_blank" class="ch-link">
+          <div><div class="ch-label">WhatsApp</div><div class="ch-name">Написать в WhatsApp</div></div>
+          <span class="ch-arrow">→</span>
+        </a>
+      </div>
+    </div>
+    <div class="contact-right">
+      <div class="info-group">
+        <div class="info-label">Организация</div>
+        <div class="info-val">ИП Фамилия Имя Отчество<br>ИНН: XXXXXXXXXXXX<br>ОГРНИП: XXXXXXXXXXXXXXX</div>
+      </div>
+      <div class="contact-divider"></div>
+      <div class="info-group">
+        <div class="info-label">Юридические документы</div>
+        <div class="info-links">
+          <a onclick="openModal('privacy')">Политика конфиденциальности</a>
+          <a onclick="openModal('offer')">Публичная оферта</a>
+          <a onclick="openModal('agreement')">Пользовательское соглашение</a>
+        </div>
+      </div>
+      <div class="contact-divider"></div>
+      <div class="info-group">
+        <div class="info-label">Страна работы</div>
+        <div class="info-val">Россия</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <a href="#hero" class="f-logo">Мы в бренде</a>
+  <span class="f-copy">© 2024 · Байерский сервис</span>
+  <div class="f-docs">
+    <a onclick="openModal('privacy')">Конфиденциальность</a>
+    <a onclick="openModal('offer')">Оферта</a>
+    <a onclick="openModal('agreement')">Соглашение</a>
+  </div>
+</footer>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-privacy" onclick="co(event,'modal-privacy')">
+  <div class="modal">
+    <div class="modal-head"><h3>Политика конфиденциальности</h3><div class="modal-close" onclick="cm('privacy')">✕</div></div>
+    <div class="modal-body">
+      <h4>1. Общие положения</h4><p>Настоящая Политика определяет порядок обработки персональных данных в соответствии с Федеральным законом № 152-ФЗ «О персональных данных». Используя сайт, вы выражаете согласие с её условиями.</p>
+      <h4>2. Состав персональных данных</h4><p>Имя, номер телефона, e-mail, адрес доставки, технические данные (IP-адрес, cookie, тип браузера).</p>
+      <h4>3. Цели обработки</h4><p>Оказание байерских услуг; связь по вопросам заказа; улучшение сервиса; соблюдение законодательства РФ.</p>
+      <h4>4. Порядок обработки</h4><p>Данные не передаются третьим лицам, кроме случаев, предусмотренных законом или необходимых для исполнения заказа (транспортная компания).</p>
+      <h4>5. Cookie</h4><p>Сайт использует cookie для улучшения работы. Cookie можно отключить в настройках браузера, однако это может повлиять на функциональность.</p>
+      <h4>6. Права пользователя</h4><p>Вы вправе запросить доступ, исправление или удаление своих данных, а также отозвать согласие — напишите нам через любой канал связи.</p>
+      <h4>7. Контакты</h4><p>По вопросам обработки данных обращайтесь через ВКонтакте, Telegram или WhatsApp, указанные на сайте.</p>
+      <h4>8. Изменения</h4><p>Оператор вправе обновлять Политику. Актуальная версия всегда размещена на данной странице.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-offer" onclick="co(event,'modal-offer')">
+  <div class="modal">
+    <div class="modal-head"><h3>Публичная оферта</h3><div class="modal-close" onclick="cm('offer')">✕</div></div>
+    <div class="modal-body">
+      <h4>1. Предмет</h4><p>Настоящая оферта — официальное предложение ИП «Мы в бренде» (Исполнитель) заключить договор на оказание байерских услуг. Акцепт — оформление заказа через мессенджеры.</p>
+      <h4>2. Услуга</h4><p>Исполнитель выкупает товары в зарубежных интернет-магазинах и доставляет их на территорию РФ по запросу Заказчика, действуя от своего имени в интересах Заказчика.</p>
+      <h4>3. Стоимость и оплата</h4><p>Стоимость = цена товара + международная доставка + вознаграждение Исполнителя. Итоговая сумма согласовывается до оформления. Оплата в рублях РФ.</p>
+      <h4>4. Сроки</h4><p>Зависят от страны отправления, наличия товара и способа доставки; согласовываются индивидуально.</p>
+      <h4>5. Обязанности сторон</h4><p>Исполнитель: выкупает согласно заявке, уведомляет о статусе, обеспечивает доставку. Заказчик: предоставляет точные данные, производит оплату, принимает товар.</p>
+      <h4>6. Ограничение ответственности</h4><p>Исполнитель не несёт ответственности за задержки по вине таможни, форс-мажора или третьих лиц. Исполнитель — не продавец; продавец — зарубежный магазин.</p>
+      <h4>7. Возврат</h4><p>Решается индивидуально согласно политике магазина-продавца и законодательству РФ. Вознаграждение при уже выкупленном товаре не возвращается.</p>
+      <h4>8. Применимое право</h4><p>Законодательство Российской Федерации.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-agreement" onclick="co(event,'modal-agreement')">
+  <div class="modal">
+    <div class="modal-head"><h3>Пользовательское соглашение</h3><div class="modal-close" onclick="cm('agreement')">✕</div></div>
+    <div class="modal-body">
+      <h4>1. Общие условия</h4><p>Используя сайт, вы принимаете настоящее Соглашение. Если вы не согласны — пожалуйста, покиньте сайт.</p>
+      <h4>2. Использование сайта</h4><p>Сайт носит информационный характер. Запрещается копировать материалы без разрешения, использовать сайт в незаконных целях, нарушать его работу.</p>
+      <h4>3. Интеллектуальная собственность</h4><p>Все материалы сайта принадлежат «Мы в бренде» и защищены законодательством об авторском праве.</p>
+      <h4>4. Ограничение ответственности</h4><p>Сайт предоставляется «как есть». Оператор не отвечает за убытки, связанные с использованием или недоступностью сайта, а также за содержание внешних ресурсов.</p>
+      <h4>5. Персональные данные</h4><p>Обработка осуществляется согласно Политике конфиденциальности, размещённой на сайте.</p>
+      <h4>6. Изменения</h4><p>Оператор вправе изменять Соглашение. Продолжение использования сайта означает согласие с изменениями.</p>
+      <h4>7. Споры</h4><p>Регулируется законодательством РФ. Споры решаются путём переговоров, при недостижении согласия — в судебном порядке.</p>
+    </div>
+  </div>
+</div>
+
+<!-- COOKIE -->
+<div class="cookie" id="ck">
+  <p>Мы используем cookie. Продолжая использовать сайт, вы соглашаетесь с <a onclick="openModal('privacy')">Политикой конфиденциальности</a>.</p>
+  <button class="cookie-btn" onclick="ac()">Принять</button>
+</div>
+
+<script>
+// cursor
+const cur = document.getElementById('c'), ring = document.getElementById('cr');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove', e=>{
+  mx=e.clientX; my=e.clientY;
+  cur.style.left=mx+'px'; cur.style.top=my+'px';
+});
+(function anim(){
+  rx+=(mx-rx)*0.11; ry+=(my-ry)*0.11;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(anim);
+})();
+document.querySelectorAll('a,button,[onclick],.modal-close').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.classList.add('hov');ring.classList.add('hov');});
+  el.addEventListener('mouseleave',()=>{cur.classList.remove('hov');ring.classList.remove('hov');});
+});
+
+// modals
+function openModal(id){document.getElementById('modal-'+id).classList.add('open');document.body.style.overflow='hidden';}
+function cm(id){document.getElementById('modal-'+id).classList.remove('open');document.body.style.overflow='';}
+function co(e,id){if(e.target===document.getElementById('modal-'+id))cm(id);}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')['privacy','offer','agreement'].forEach(cm);});
+
+// cookie
+function ac(){document.getElementById('ck').classList.add('hidden');localStorage.setItem('ck','1');}
+if(localStorage.getItem('ck'))document.getElementById('ck').classList.add('hidden');
+</script>
+</body>
+</html>
