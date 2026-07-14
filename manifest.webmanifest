@@ -1,0 +1,14 @@
+{
+  "name": "Мы в бренде",
+  "short_name": "Мы в бренде",
+  "description": "Байерский сервис: выкуп и доставка товаров из официальных магазинов США и Европы",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F7F3FD",
+  "theme_color": "#6B3FA0",
+  "icons": [
+    { "src": "icon-192.png?v=2", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png?v=2", "sizes": "512x512", "type": "image/png" }
+  ]
+}

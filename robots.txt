@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO: после покупки домена замените vitol.gitverse.site/mevbrende на реальный домен
+Sitemap: https://vitol.gitverse.site/mevbrende/sitemap.xml
